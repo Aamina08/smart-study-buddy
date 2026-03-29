@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
-import { Brain, LayoutDashboard, MessageSquare, LogOut } from "lucide-react";
+import { Brain, LayoutDashboard, MessageSquare, Calendar, LogOut } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
@@ -21,6 +21,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         <nav className="flex-1 px-3 space-y-1">
           <NavLink to="/" icon={<LayoutDashboard className="h-4 w-4" />}>Dashboard</NavLink>
           <NavLink to="/chat" icon={<MessageSquare className="h-4 w-4" />}>AI Chat</NavLink>
+          <NavLink to="/timetable" icon={<Calendar className="h-4 w-4" />}>Timetable</NavLink>
         </nav>
 
         <div className="p-3">
@@ -46,6 +47,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         <div className="flex items-center gap-2">
           <NavLink to="/" icon={<LayoutDashboard className="h-4 w-4" />} mobile>Dashboard</NavLink>
           <NavLink to="/chat" icon={<MessageSquare className="h-4 w-4" />} mobile>Chat</NavLink>
+          <NavLink to="/timetable" icon={<Calendar className="h-4 w-4" />} mobile>Timetable</NavLink>
           <Button variant="ghost" size="icon" onClick={signOut}>
             <LogOut className="h-4 w-4" />
           </Button>
