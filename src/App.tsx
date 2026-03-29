@@ -7,6 +7,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "./pages/Index";
 import ChatRoute from "./pages/ChatRoute";
 import TimetablePage from "./pages/TimetablePage";
+import DeadlinesPage from "./pages/DeadlinesPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/chat" element={<ChatRoute />} />
             <Route path="/timetable" element={<TimetablePage />} />
+            <Route path="/deadlines" element={<DeadlinesPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
