@@ -22,6 +22,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           <NavLink to="/" icon={<LayoutDashboard className="h-4 w-4" />}>Dashboard</NavLink>
           <NavLink to="/chat" icon={<MessageSquare className="h-4 w-4" />}>AI Chat</NavLink>
           <NavLink to="/timetable" icon={<Calendar className="h-4 w-4" />}>Timetable</NavLink>
+          <NavLink to="/deadlines" icon={<ClipboardList className="h-4 w-4" />}>Deadlines</NavLink>
         </nav>
 
         <div className="p-3">
