@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import ChatRoute from "./pages/ChatRoute";
 import TimetablePage from "./pages/TimetablePage";
 import DeadlinesPage from "./pages/DeadlinesPage";
+import ResourcesPage from "./pages/ResourcesPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
