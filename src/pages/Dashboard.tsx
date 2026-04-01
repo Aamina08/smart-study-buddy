@@ -1,7 +1,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Calendar, ClipboardList, BookOpen, ArrowRight } from "lucide-react";
+import { MessageSquare, Calendar, ClipboardList, BookOpen, Users, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -43,6 +43,7 @@ export default function Dashboard() {
     { title: "Timetable", description: "Manage your schedule", icon: Calendar, to: "/timetable", color: "bg-accent" },
     { title: "Deadlines", description: "Track due dates", icon: ClipboardList, to: "/deadlines", color: "bg-warning" },
     { title: "Resources", description: "Study materials", icon: BookOpen, to: "/resources", color: "bg-success" },
+    { title: "Study Groups", description: "Collaborate & learn", icon: Users, to: "/groups", color: "bg-primary" },
   ];
 
   return (
