@@ -28,7 +28,11 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           <NavLink to="/groups" icon={<Users className="h-4 w-4" />}>Study Groups</NavLink>
         </nav>
 
-        <div className="p-3">
+        <div className="p-3 space-y-1">
+          <div className="flex items-center justify-between px-3 py-1">
+            <span className="text-xs text-sidebar-foreground/50">Alerts</span>
+            <NotificationBell />
+          </div>
           <Button
             variant="ghost"
             className="w-full justify-start text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent"
