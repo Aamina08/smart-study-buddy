@@ -2,7 +2,46 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MessageSquare, Calendar, ClipboardList, BookOpen, Users, Settings, ArrowRight } from "lucide-react";
-...
+import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+
+export default function Dashboard() {
+  const { user } = useAuth();
+
+  const { data: profile } = useQuery({
+    queryKey: ["profile", user?.id],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("user_id", user!.id)
+        .single();
+      return data;
+    },
+    enabled: !!user,
+  });
+
+  const { data: recentSessions } = useQuery({
+    queryKey: ["recent-sessions", user?.id],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("chat_sessions")
+        .select("*")
+        .eq("user_id", user!.id)
+        .order("updated_at", { ascending: false })
+        .limit(3);
+      return data ?? [];
+    },
+    enabled: !!user,
+  });
+
+  const firstName = profile?.full_name?.split(" ")[0] || "Student";
+
+  const quickActions = [
+    { title: "AI Chat", description: "Ask your AI assistant anything", icon: MessageSquare, to: "/chat", color: "bg-primary" },
+    { title: "Timetable", description: "Manage your schedule", icon: Calendar, to: "/timetable", color: "bg-accent" },
+    { title: "Deadlines", description: "Track due dates", icon: ClipboardList, to: "/deadlines", color: "bg-warning" },
     { title: "Resources", description: "Study materials", icon: BookOpen, to: "/resources", color: "bg-success" },
     { title: "Study Groups", description: "Collaborate & learn", icon: Users, to: "/groups", color: "bg-primary" },
     { title: "Profile", description: "Update your details", icon: Settings, to: "/profile", color: "bg-accent" },
@@ -10,7 +49,6 @@ import { MessageSquare, Calendar, ClipboardList, BookOpen, Users, Settings, Arro
 
   return (
     <div className="p-6 md:p-8 max-w-6xl mx-auto space-y-8 animate-fade-in">
-      {/* Welcome */}
       <div>
         <h1 className="text-3xl font-display font-bold text-foreground">
           Welcome back, {firstName} 👋
@@ -20,7 +58,6 @@ import { MessageSquare, Calendar, ClipboardList, BookOpen, Users, Settings, Arro
         </p>
       </div>
 
-      {/* Quick actions */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {quickActions.map((action) => (
           <Link key={action.title} to={action.to}>
@@ -37,7 +74,6 @@ import { MessageSquare, Calendar, ClipboardList, BookOpen, Users, Settings, Arro
         ))}
       </div>
 
-      {/* Recent chats */}
       <Card className="border-border">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="font-display text-lg">Recent Conversations</CardTitle>
