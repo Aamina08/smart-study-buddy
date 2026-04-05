@@ -1,7 +1,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Calendar, ClipboardList, BookOpen, Users, ArrowRight } from "lucide-react";
+import { MessageSquare, Calendar, ClipboardList, BookOpen, Users, Settings, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -44,11 +44,11 @@ export default function Dashboard() {
     { title: "Deadlines", description: "Track due dates", icon: ClipboardList, to: "/deadlines", color: "bg-warning" },
     { title: "Resources", description: "Study materials", icon: BookOpen, to: "/resources", color: "bg-success" },
     { title: "Study Groups", description: "Collaborate & learn", icon: Users, to: "/groups", color: "bg-primary" },
+    { title: "Profile", description: "Update your details", icon: Settings, to: "/profile", color: "bg-accent" },
   ];
 
   return (
     <div className="p-6 md:p-8 max-w-6xl mx-auto space-y-8 animate-fade-in">
-      {/* Welcome */}
       <div>
         <h1 className="text-3xl font-display font-bold text-foreground">
           Welcome back, {firstName} 👋
@@ -58,7 +58,6 @@ export default function Dashboard() {
         </p>
       </div>
 
-      {/* Quick actions */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {quickActions.map((action) => (
           <Link key={action.title} to={action.to}>
@@ -75,7 +74,6 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* Recent chats */}
       <Card className="border-border">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="font-display text-lg">Recent Conversations</CardTitle>

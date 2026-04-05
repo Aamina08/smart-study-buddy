@@ -102,8 +102,9 @@ export default function StudyGroupsPage() {
   // Realtime subscription for messages
   useEffect(() => {
     if (!selectedGroup) return;
+
     const channel = supabase
-      .channel(`group-messages-${selectedGroup.id}`)
+      .channel(`group-messages-${selectedGroup.id}-${crypto.randomUUID()}`)
       .on(
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "study_group_messages", filter: `group_id=eq.${selectedGroup.id}` },
@@ -123,7 +124,10 @@ export default function StudyGroupsPage() {
         }
       )
       .subscribe();
-    return () => { supabase.removeChannel(channel); };
+
+    return () => {
+      void supabase.removeChannel(channel);
+    };
   }, [selectedGroup?.id, queryClient]);
 
   // Auto-scroll on new messages

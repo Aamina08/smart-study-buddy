@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
-import { Brain, LayoutDashboard, MessageSquare, Calendar, ClipboardList, BookOpen, Users, LogOut } from "lucide-react";
+import { Brain, LayoutDashboard, MessageSquare, Calendar, ClipboardList, BookOpen, Users, Settings, LogOut } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import NotificationBell from "@/components/NotificationBell";
 
@@ -10,7 +10,6 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen flex bg-background">
-      {/* Sidebar */}
       <aside className="hidden md:flex w-64 flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border">
         <div className="p-6 flex items-center gap-3">
           <div className="rounded-lg gradient-hero p-2">
@@ -26,6 +25,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           <NavLink to="/deadlines" icon={<ClipboardList className="h-4 w-4" />}>Deadlines</NavLink>
           <NavLink to="/resources" icon={<BookOpen className="h-4 w-4" />}>Resources</NavLink>
           <NavLink to="/groups" icon={<Users className="h-4 w-4" />}>Study Groups</NavLink>
+          <NavLink to="/profile" icon={<Settings className="h-4 w-4" />}>Profile</NavLink>
         </nav>
 
         <div className="p-3 space-y-1">
@@ -44,7 +44,6 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         </div>
       </aside>
 
-      {/* Mobile header */}
       <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-card border-b border-border px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="rounded-lg gradient-hero p-1.5">
@@ -60,13 +59,13 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           <NavLink to="/deadlines" icon={<ClipboardList className="h-4 w-4" />} mobile>Deadlines</NavLink>
           <NavLink to="/resources" icon={<BookOpen className="h-4 w-4" />} mobile>Resources</NavLink>
           <NavLink to="/groups" icon={<Users className="h-4 w-4" />} mobile>Groups</NavLink>
+          <NavLink to="/profile" icon={<Settings className="h-4 w-4" />} mobile>Profile</NavLink>
           <Button variant="ghost" size="icon" onClick={signOut}>
             <LogOut className="h-4 w-4" />
           </Button>
         </div>
       </div>
 
-      {/* Main content */}
       <main className="flex-1 md:overflow-auto mt-14 md:mt-0">
         {children}
       </main>

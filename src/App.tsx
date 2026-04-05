@@ -10,6 +10,7 @@ import TimetablePage from "./pages/TimetablePage";
 import DeadlinesPage from "./pages/DeadlinesPage";
 import ResourcesPage from "./pages/ResourcesPage";
 import StudyGroupsPage from "./pages/StudyGroupsPage";
+import ProfileSettingsPage from "./pages/ProfileSettingsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/deadlines" element={<DeadlinesPage />} />
             <Route path="/resources" element={<ResourcesPage />} />
             <Route path="/groups" element={<StudyGroupsPage />} />
+            <Route path="/profile" element={<ProfileSettingsPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
