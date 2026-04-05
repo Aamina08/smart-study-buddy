@@ -1,49 +1,11 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Calendar, ClipboardList, BookOpen, Users, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
-
-export default function Dashboard() {
-  const { user } = useAuth();
-
-  const { data: profile } = useQuery({
-    queryKey: ["profile", user?.id],
-    queryFn: async () => {
-      const { data } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("user_id", user!.id)
-        .single();
-      return data;
-    },
-    enabled: !!user,
-  });
-
-  const { data: recentSessions } = useQuery({
-    queryKey: ["recent-sessions", user?.id],
-    queryFn: async () => {
-      const { data } = await supabase
-        .from("chat_sessions")
-        .select("*")
-        .eq("user_id", user!.id)
-        .order("updated_at", { ascending: false })
-        .limit(3);
-      return data ?? [];
-    },
-    enabled: !!user,
-  });
-
-  const firstName = profile?.full_name?.split(" ")[0] || "Student";
-
-  const quickActions = [
-    { title: "AI Chat", description: "Ask your AI assistant anything", icon: MessageSquare, to: "/chat", color: "bg-primary" },
-    { title: "Timetable", description: "Manage your schedule", icon: Calendar, to: "/timetable", color: "bg-accent" },
-    { title: "Deadlines", description: "Track due dates", icon: ClipboardList, to: "/deadlines", color: "bg-warning" },
+import { MessageSquare, Calendar, ClipboardList, BookOpen, Users, Settings, ArrowRight } from "lucide-react";
+...
     { title: "Resources", description: "Study materials", icon: BookOpen, to: "/resources", color: "bg-success" },
     { title: "Study Groups", description: "Collaborate & learn", icon: Users, to: "/groups", color: "bg-primary" },
+    { title: "Profile", description: "Update your details", icon: Settings, to: "/profile", color: "bg-accent" },
   ];
 
   return (

@@ -41,9 +41,9 @@ export default function NotificationBell() {
   // Realtime subscription
   useEffect(() => {
     if (!user) return;
-    const channelName = `user-notifications-${user.id}-${Date.now()}`;
+
     const channel = supabase
-      .channel(channelName)
+      .channel(`user-notifications-${user.id}-${crypto.randomUUID()}`)
       .on(
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "notifications", filter: `user_id=eq.${user.id}` },
@@ -52,7 +52,10 @@ export default function NotificationBell() {
         }
       )
       .subscribe();
-    return () => { supabase.removeChannel(channel); };
+
+    return () => {
+      void supabase.removeChannel(channel);
+    };
   }, [user?.id, queryClient]);
 
   const unreadCount = notifications.filter((n) => !n.read).length;
